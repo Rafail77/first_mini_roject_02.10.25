@@ -1,0 +1,245 @@
+/* БАЗА */
+* { box-sizing: border-box; } /* Для предсказуемых размеров */
+body {
+  margin: 30px;                 /* Внешний отступ страницы */
+  padding: 0;
+  background-color: rgba(244, 246, 245, 1);
+}
+
+/* Верхний хедер */
+.container { display: flex; justify-content: space-between; flex-wrap: wrap; margin: 20px; }
+.header { margin-top: 200px; background: rgba(225,237,230,1); width: 1440px; height: 100px; }
+.header-block { display:flex; align-items:center; justify-content:space-between; gap:40px; margin:0 auto; padding:0 24px; }
+.left-block { display:flex; align-items:center; }
+.logo img { display:block; height:35px; width:auto; margin:33px 0 32px 165px; }
+
+.right-block { display:flex; align-items:center; gap:60px; margin-right:165px; }
+.nav { display:flex; gap:60px; }
+.nav a {
+  font-family: 'Raleway', sans-serif;
+  text-decoration:none;
+  color:#2C2D35;
+  font-size:20px; font-weight:500; line-height:100%; white-space:nowrap;
+}
+.nav a:hover  { color:#598D66; }
+.nav a:focus  { color:#2C2D35; background:#D4E8D9; }
+.nav a:active { color:#376B44; transform:scale(.98); }
+
+/* Корзина */
+.basket {
+  position: relative;               /* НУЖНО для позиционирования бейджа */
+  display: inline-flex; align-items:center; justify-content:center;
+  width: 40px; height: 40px;
+  cursor: pointer; border-radius: 8px;
+  color: #2C2D35;                   /* currentColor для SVG */
+  background: transparent;
+  border: none;                      /* так как это button */
+  transition: transform .2s ease, color .2s ease, background .2s ease;
+}
+.basket:hover  { color:#598D66; transform: scale(1.06); }
+.basket:focus  { outline: none; background:#D4E8D9; color:#598D66; }
+.basket:active { transform: scale(.94); color:#376B44; }
+.basket.added  { animation: bounce .4s; } /* класс на короткую анимацию */
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2); }
+  60% { transform: scale(.85); }
+  100% { transform: scale(1); }
+}
+
+/* Бейдж-счётчик */
+.basket__count {
+  position: absolute;
+  top: -4px;                     /* Сместили к верхнему правому углу */
+  right: -4px;
+  /* ОШИБКА БЫЛА: left: +2px; — некорректный синтаксис. Заменено на right:-4px */
+  min-width: 16px; height: 16px; /* Минимальный круглый бейдж */
+  padding: 0 3px;                /* Немного горизонтального воздуха для двузначных чисел */
+  border-radius: 999px;          /* Пилюля/кружок */
+  background: #598D66; color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items:center; justify-content:center;
+}
+
+/* Блок картинка слева + текст справа */
+.container_img {
+  display:flex; align-items:center; gap:30px; padding-left:165px;
+  width: 1440px; height: 620px;
+}
+.container_img img {
+  flex-shrink:0;
+  width:540px;                   /* Фиксируем ширину */
+  height:auto;                   /* Сохраняем пропорции */
+  /* ОШИБКА БЫЛА: одновременно height:621px и height:auto — конфликт. Оставили height:auto */
+}
+.text-block { width:540px; }
+.text-block h1, .highlight {
+  font-family:'Raleway', sans-serif; color:#2C2D35; font-size:60px; font-weight:500; line-height:110%;
+}
+.highlight { color:#376B44; }     /* Только цвет меняем у "Ink. House" */
+.text-block p {
+  font-family:'Raleway', sans-serif; color:#86928B; font-size:18px; font-weight:500; line-height:1.5; margin-bottom:60px;
+}
+.text-block .btn {
+  color:#598D66; border:1px solid #598D66; background:transparent; padding:21px 60px;
+  font-size:20px; font-weight:500; line-height:100%; cursor:pointer;
+}
+.text-block .btn:hover  { background:#598D66; color:#F4F6F5; }
+.text-block .btn:focus  { background:#D4E8D9; color:#598D66; outline:none; }
+.text-block .btn:active { background:#376B44; color:#fff; transform:scale(.98); }
+
+/* ===== Грид секции «Репродукции» ===== */
+.container_grid {
+  background-color:rgba(244, 246, 245, 1);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "header2 header2 header2"   /* хедер на всю ширину */
+    "cards   cards   cards";    /* область карточек */
+  gap: 30px;
+  width: 1110px;
+  margin: 0 auto;
+  padding: 0;                   /* Без паддингов — хедер «прилипает» к краям области */
+}
+
+/* Контейнер: выравниваем ВСЕ дочерние по центру по вертикали */
+.header2 {                                  /* Родитель — строка с заголовком и табами */
+  grid-area: header2;                        /* В гриде занимает область header2 */
+  display: flex;                             /* Делаем флекс-контейнер */
+  align-items: center;                       /* ⬅ Центр по вертикали для всех детей */
+  justify-content: flex-start;               /* Заголовок слева */
+  min-height: 44px;                          /* ⬅ Высота не меньше высоты кнопок (для идеального центрирования) */
+}
+
+/* Заголовок: убираем всё, что мешает точному центрированию */
+.header2 .title {                            /* Сам текст «Репродукции» */
+  margin: 0;                                 /* ⬅ Сбрасываем дефолтные отступы h1 */
+  font-family: 'Raleway', sans-serif;        /* Шрифт */
+  font-weight: 500;                          /* Толщина */
+  font-size: 30px;                           /* Размер */
+  line-height: 1;                            /* ⬅ Чёткая высота строки, без «воздуха» сверху/снизу */
+  display: flex;                             
+  align-items: center;                       /* ⬅ На случай переноса строки — центрируем сам контент внутри h1 */
+}
+
+/* Контейнер с кнопками — прижат вправо */
+.header2 .tabs {
+  display: flex;                             /* В линию */
+  gap: 32px;                                 /* Промежутки между кнопками */
+  margin-left: auto;                         /* ⬅ Толкаем вправо */
+}
+
+.tab-btn {
+  font-family:'Raleway', sans-serif; font-size:16px; font-weight:500; line-height:1;
+  padding:10px 20px; border:none; border-radius:20px; background:#D4E8D9; color:#2C2D35;
+  cursor:pointer; white-space:nowrap; transition: background .2s ease, color .2s ease;
+}
+.tab-btn:hover     { background:#598D66; color:#F4F6F5; }
+.tab-btn.is-active { background:#376B44; color:#F4F6F5; }
+
+/* Внутренний грид карточек */
+.cards {
+  grid-area: cards;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 в ряд */
+  gap: 30px;
+}
+
+/* Управление страницами-странами (табы) */
+.page { display: none; }             /* ОШИБКА БЫЛА: не было скрытия неактивных страниц */
+.page.is-active { display: contents; } /* Вкладываем элементы страницы прямо в .cards-grid */
+
+/* Карточка */
+.card {
+  background-color:rgba(225, 237, 230, 1); 
+  padding: 20px;
+  display:flex; 
+  flex-direction:column; 
+  align-items:flex-start; 
+  gap:8px; 
+  border: 1px solid rgb(28, 6, 107); /* Видимая рамка карточки для визуализации. ПОТОМ УБЕРУ */
+}
+.card img { 
+  width:100%; 
+  height:auto; 
+  display:block; 
+  margin-bottom: 20px;
+}
+
+.card .autor { 
+  color:rgba(134, 146, 139, 1); 
+  font: 500 18px/1 'Raleway', sans-serif; 
+}
+
+.card .name { 
+  color:rgba(44, 45, 53, 1); 
+  font: 500 30px/1 'Raleway', sans-serif; 
+  margin-bottom: 8px;
+}
+
+.card .materials { 
+  color:rgba(44, 45, 53, 1); 
+  font: 500 18px/1 'Raleway', sans-serif; 
+  margin-bottom: 30px;
+}
+
+.card .price { 
+  color:rgba(89, 141, 102, 1); 
+  font: 500 24px/1 'Raleway', sans-serif; 
+  margin-bottom: 20px;
+}
+
+.card .btn3 {
+  background-color:rgba(225, 237, 230, 1);
+  margin-top:auto; 
+  align-self:stretch; 
+  width: 310px;
+  height:65px;  
+  border:1px solid rgba(89, 141, 102, 1); 
+  color:rgba(89, 141, 102, 1); 
+  font: 500 20px/1 'Raleway', sans-serif; 
+  cursor:pointer; 
+  text-align:center;
+}
+
+.card .btn3:hover  { 
+  background:rgba(89, 141, 102, 1); 
+  color:rgba(244, 246, 245, 1); 
+}
+
+.card .btn3:focus {
+  background-color: rgba(212, 232, 217, 1);
+  border: 1px solid rgba(89, 141, 102, 1);
+  color: rgba(89, 141, 102, 1);
+}
+
+.card .btn3:active { 
+  background:rgba(55, 107, 68, 1); 
+  color:rgba(255, 255, 255, 1); 
+}
+
+
+
+
+/* ===== Блок с фоном Fresco ===== */
+.Fresco {
+  position: relative;                /* ВАЖНО: чтобы псевдоэлемент ::before был привязан к контейнеру */
+  background-image: url("./assets/pic_background.png");
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  padding: 60px 40px; color:#2C2D35;
+}
+.Fresco::before {
+  content:""; position:absolute; inset:0; background: rgba(0,0,0,0.25); z-index:0;
+  /* ОШИБКА БЫЛА: не было position: relative у .Fresco → затемнение не привязывалось к блоку */
+}
+.Fresco .header-block {
+  position: relative; z-index:1; max-width:1110px; margin:0 auto;
+}
+.Fresco h1, .Fresco p, .Fresco .dtn { color:#F4F6F5; } /* Светлый текст поверх затемнения */
+.Fresco .dtn {
+  margin-top: 24px; background:#598D66; border:none; border-radius:8px; height:46px; padding:0 24px;
+  color:#F4F6F5; font:600 16px/46px 'Raleway', sans-serif; cursor:pointer;
+}
+.Fresco .dtn:hover { background:#376B44; }

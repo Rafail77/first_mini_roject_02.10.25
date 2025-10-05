@@ -1,0 +1,346 @@
+<!DOCTYPE html> <!-- HTML5-документ -->
+<html lang="en"> <!-- Язык документа -->
+<head> <!-- Метаданные и подключения -->
+  <meta charset="UTF-8"> <!-- Кодировка UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Адаптив -->
+  <title>Grid_Homework_28.10.25</title> <!-- Заголовок вкладки -->
+  <link rel="stylesheet" href="styles.css"> <!-- Подключаем CSS -->
+
+  <!-- Шрифты Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet"> <!-- OK -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet"> <!-- OK -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap" rel="stylesheet"> <!-- OK -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> <!-- OK -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- OK -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> <!-- OK -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- OK -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> <!-- OK -->
+</head> <!-- /head -->
+
+<body> <!-- Начало тела -->
+
+<!-- ===== Верхний хедер с логотипом, меню и корзиной ===== -->
+<div class="container"> <!-- Родитель: flex-контейнер -->
+  <header class="header"> <!-- Визуальный блок хедера -->
+    <div class="header-block"> <!-- Внутренний контейнер -->
+
+      <div class="left-block"> <!-- Логотип слева -->
+        <div class="logo">
+          <img src="./assets/Frame 85.png" alt="logo" width="143" height="35"> <!-- Лого -->
+        </div>
+      </div>
+
+      <div class="right-block"> <!-- Навигация + корзина справа -->
+        <nav class="nav"> <!-- Меню -->
+          <a href="#">Репродукции</a>
+          <a href="#">Новинки</a>
+          <a href="#">О нас</a>
+        </nav>
+
+        <!-- Корзина с иконкой и бейджиком -->
+        <button class="basket" type="button" tabindex="0" aria-label="Корзина">
+          <!-- ПРИМЕЧАНИЕ: заменил <div> на <button> ради фокуса/доступности -->
+          <svg class="basket__icon" width="24" height="24" viewBox="0 0 24 24"
+               fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Тот же SVG, но со stroke="currentColor", чтобы цвет менялся из CSS -->
+            <g clip-path="url(#clip0_3_994)">
+              <path d="M9.25 21.1667C9.756 21.1667 10.1667 20.7563 10.1667 20.25C10.1667 19.7438 9.756 19.3334 9.25 19.3334C8.744 19.3334 8.333 19.7438 8.333 20.25C8.333 20.7563 8.744 21.1667 9.25 21.1667Z"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19.333 21.1667C19.84 21.1667 20.25 20.7563 20.25 20.25C20.25 19.7438 19.84 19.3334 19.333 19.3334C18.827 19.3334 18.417 19.7438 18.417 20.25C18.417 20.7563 18.827 21.1667 19.333 21.1667Z"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1.917 1.917H5.583L8.04 14.1908C8.124 14.6128 8.353 14.9919 8.689 15.2617C9.024 15.5315 9.443 15.6749 9.873 15.6666H18.783C19.213 15.6749 19.633 15.5315 19.968 15.2617C20.303 14.9919 20.533 14.6128 20.617 14.1908L22.083 6.5H6.5"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_3_994">
+                <rect width="22" height="22" fill="white" transform="translate(1 1)"/>
+              </clipPath>
+            </defs>
+          </svg>
+          <span class="basket__count">0</span> <!-- Бейдж-счётчик -->
+        </button>
+        <!-- ОШИБКА БЫЛА: раньше бейдж неправильно позиционировался и имел left: +2px; (некорректный синтаксис) -->
+      </div> <!-- /right-block -->
+    </div> <!-- /header-block -->
+  </header> <!-- /header -->
+</div> <!-- /container -->
+
+<!-- ===== Блок с картинкой слева и текстом справа ===== -->
+<div class="container_img"> <!-- Flex-контейнер -->
+  <img src="./assets/Layer 0 1.png" alt="Grenada pigeon" width="540" height="621" class="float-left">
+  <!-- ОШИБКА БЫЛА в CSS: конфликтующая пара height:621px и height:auto; оставляем одно корректное значение -->
+
+  <div class="text-block"> <!-- Текст справа -->
+    <h1>Реплики картин <br>от <span class="highlight">Ink. House</span></h1>
+    <p>Высокое качество отрисовки на плотной бумаге или льняном
+      <br>холсте. Редкие произведения, доступные цены.</p>
+    <button class="btn" type="button">Продукция</button>
+  </div>
+</div>
+
+<!-- ===== Грид: хедер секции + вкладки + карточки ===== -->
+<div class="container_grid"> <!-- Родитель: 2 области — header2 и cards -->
+
+  <header class="header2"> <!-- Хедер над карточками -->
+    <h1 class="title">Репродукции</h1> <!-- Заголовок слева -->
+    <div class="tabs"> <!-- Кнопки-страны справа -->
+      <button class="tab-btn is-active" data-target="#France" type="button">Франция</button>
+      <button class="tab-btn" data-target="#Germany" type="button">Германия</button>
+      <button class="tab-btn" data-target="#England" type="button">Англия</button>
+    </div>
+  </header>
+
+  <div class="cards"> <!-- Внутренний grid 3×? для страниц -->
+    <!-- Страница Франция (видна по умолчанию) -->
+    <section id="France" class="page is-active"> <!-- ОШИБКА БЫЛА: не хватало CSS для .page/.is-active -->
+      <!-- Ряд 1 -->
+      <div class="card">
+        <img src="./assets/03 (6).png" alt="Amur" width="310" height="422">
+        <div class="autor">Марсель Руссо</div>
+        <div class="name">Охота Амура</div>
+        <div class="materials">Холст, масло (50х80)</div>
+        <div class="price">14 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (7).png" alt="The Lady with the Dog" width="310" height="422">
+        <div class="autor">Анри Селин</div>
+        <div class="name">Дама с собачкой</div>
+        <div class="materials">Акрил, бумага (50х80)</div>
+        <div class="price">16 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (8).png" alt="Procedure" width="310" height="422">
+        <div class="autor">Франсуа Дюпон</div>
+        <div class="name">Процедура</div>
+        <div class="materials">Цветная литография (40х60)</div>
+        <div class="price">20 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <!-- Ряд 2 -->
+      <div class="card">
+        <img src="./assets/03 (9).png" alt="Rose" width="310" height="422">
+        <div class="autor">Луи Детуш</div>
+        <div class="name">Роза</div>
+        <div class="materials">Бумага, акрил (50х80)</div>
+        <div class="price">12 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (10).png" alt="Bird's meal" width="310" height="422">
+        <div class="autor">Франсуа Дюпон</div>
+        <div class="name">Птичья трапеза</div>
+        <div class="materials">Цветная литография (40х60)</div>
+        <div class="price">22 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (11).png" alt="Landscape with fish" width="310" height="422">
+        <div class="autor">Пьер Моранж</div>
+        <div class="name">Пейзаж с рыбой</div>
+        <div class="materials">Цветная литография (40х60)</div>
+        <div class="price">20 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+    </section>
+
+    <!-- Страница Германия (скрыта при старте) -->
+    <section id="Germany" class="page">
+      <!-- Ряд 1 -->
+      <div class="card">
+        <img src="./assets/03.png" alt="Above the city" width="310" height="422">
+        <div class="autor">Курт Вернер</div>
+        <div class="name">Над городом</div>
+        <div class="materials">Цветная литография (40х60) </div>
+        <div class="price">16 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (1).png" alt="Chicks" width="310" height="422">
+        <div class="autor">Макс Рихтер</div>
+        <div class="name">Птенцы</div>
+        <div class="materials">Холст, масло (50х80) </div>
+        <div class="price">14 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (2).png" alt="Among the leaves" width="310" height="422">
+        <div class="autor">Мартин Майер</div>
+        <div class="name">Среди листьев</div>
+        <div class="materials">Цветная литография (40х60) </div>
+        <div class="price">20 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <!-- Ряд 2 -->
+      <div class="card">
+        <img src="./assets/03 (3).png" alt="Bright bird" width="310" height="422">
+        <div class="autor">Герман Беккер</div>
+        <div class="name">Яркая птица</div>
+        <div class="materials">Цветная литография (40х60) </div>
+        <div class="price">13 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (4).png" alt="Woodpeckers" width="310" height="422">
+        <div class="autor">Вульф Бауэр</div>
+        <div class="name">Дятлы</div>
+        <div class="materials">Бумага, акрил (50х80) </div>
+        <div class="price">20 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (5).png" alt="Big waters" width="310" height="422">
+        <div class="autor">Вальтер Хартманн</div>
+        <div class="name">Большие воды</div>
+        <div class="materials">Бумага, акрил (50х80) </div>
+        <div class="price">23 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+    </section>
+
+    <!-- Страница Англия (скрыта при старте) -->
+    <section id="England" class="page">
+      <!-- Ряд 1 -->
+      <div class="card">
+        <img src="./assets/03 (18).png" alt="wild beast" width="310" height="422">
+        <div class="autor">Пол Смит</div>
+        <div class="name">Дикий зверь</div>
+        <div class="materials">Акварель, бумага (50х80)</div>
+        <div class="price">19 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (19).png" alt="rocky shore" width="310" height="422">
+        <div class="autor">Джон Уайт</div>
+        <div class="name">Скалистый берег</div>
+        <div class="materials">Цветная литография (40х60)</div>
+        <div class="price">17 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (20).png" alt="River and mountains" width="310" height="422">
+        <div class="autor">Джим Уотсон</div>
+        <div class="name">Река и горы</div>
+        <div class="materials">Акварель, бумага (50х80)</div>
+        <div class="price">20 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <!-- Ряд 2 -->
+      <div class="card">
+        <img src="./assets/03 (21).png" alt="White parrot" width="310" height="422">
+        <div class="autor">Юджин Зиллион</div>
+        <div class="name">Белый попугай</div>
+        <div class="materials">Цветная литография (40х60)</div>
+        <div class="price">15 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (22).png" alt="Night fish" width="310" height="422">
+        <div class="autor">Эрик Гиллман</div>
+        <div class="name">Ночная рыба</div>
+        <div class="materials">Бумага, акрил (50х80)</div>
+        <div class="price">12 500 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+      <div class="card">
+        <img src="./assets/03 (23).png" alt="ginger cat" width="310" height="422">
+        <div class="autor">Альфред Барр</div>
+        <div class="name">Рыжий кот</div>
+        <div class="materials">Цветная литография (40х60)</div>
+        <div class="price">21 000 руб</div>
+        <button class="btn3 add-to-cart" type="button">В корзину</button>
+      </div>
+    </section>
+
+  </div> <!-- /cards -->
+</div> <!-- /container_grid -->
+
+<!-- ===== Блок с фоном-картинкой и текстом ===== -->
+<div class="Fresco"> <!-- Контейнер с фоновой картинкой -->
+  <!-- ОШИБКА БЫЛА: нарушен порядок закрывающих тегов header/div.
+       Исправил: header полностью ВНУТРИ .Fresco и закрывается до закрытия .Fresco -->
+  <header class="header3">
+    <div class="header-block">
+      <div class="logo">
+        <img src="./assets/Star 2.png" alt="logo" width="80" height="80">
+        <h1>Новая коллекция французских авторов</h1>
+      </div>
+
+      <p>
+        Сложно сказать, почему акционеры крупнейших компаний
+        <br>призывают нас к новым свершениям, которые, в свою очередь,
+        <br>должны быть заблокированы в рамках своих собственных
+        <br>рациональных ограничений.
+      </p>
+
+      <p style="margin-top: 40px;">
+        Принимая во внимание показатели успешности, граница
+        <br>обучения кадров предопределяет высокую востребованность
+        <br>направлений прогрессивного развития.
+      </p>
+
+      <button class="dtn" type="button">Ознакомиться</button>
+    </div>
+  </header>
+</div> <!-- /Fresco -->
+
+
+<!-- Float -->
+  <div class="image-container">
+<div class="left-block2">
+   <img src="./assets/59a6e3f6621f515e33ea7a82 1.png" alt="Основная картинка" class="Frame"> <!-- Рамка -->
+   <img src="./assets/Layer 1 1.png" alt="Вложенная картинка" class="Hand"> <!-- Картинка поверх Рамки -->
+  </div>
+   </div>
+<div class="right-block2"></div>
+        <h1>Наша команда</h1>
+        <p>Значимость этих проблем настолько очевидна, что базовый вектор 
+          <br>развития позволяет оценить значение экспериментов, поражающих 
+          <br>по своей масштабности и грандиозности. Мы вынуждены отталкиваться 
+          <br>от того, что консультация с широким активом.</p>
+        <img src="./assets/Ellipse 30.png" alt="icon1" class="icon" width="80" height="80">
+        <img src="./assets/Ellipse 31.png" alt="icon2" class="icon" width="80" height="80">
+        <img src="./assets/Ellipse 32.png" alt="icon3" class="icon" width="80" height="80">
+    </div>
+</div>
+
+<!-- Footer -->
+ <div class="Footer">
+  <div class="left-block3">
+    <div class="footer1">
+      <img src="./assets/Frame 85.png" alt="logo" width="143" height="35"> <!-- Картинка логотипа -->
+      <h3>+7 (999) 543-54-54</h3>
+      <h4>Мастерская</h4>
+    </div>
+    <div class="footer2">
+      <div class="title">Репродукции</div>
+      <div class="subtitle">Франция<br>Германия<br>Англия</div>
+    </div>
+
+    <div class="footer3">
+      <div class="title">Новинки</div>
+      <div class="subtitle">2021<br>2020</div>
+    </div>
+
+        <div class="footer4">
+      <div class="title">О нас</div>
+      <div class="subtitle">Художники<br>Менеджеры</div>
+    </div>
+
+    <div class="raight-block3">
+     <img src="./assets/Vector (2).svg" alt="icon4" class="icon4" width="24" height="24">
+     <img src="./assets/Vector.svg" alt="icon5" class="icon4" width="24" height="24">
+     <img src="./assets/Vector (1).svg" alt="icon6" class="icon4" width="24" height="24">
+     <div class="subtitle">Ink. House ®<br>All rights reserved</div>
+    </div>
+  </div>
+ </div>
+
+</div><!-- Конец родительского контейнера - flex -->
+
+
+  <script src="script.js"></script>
+
+</body> <!-- Конец body -->
+</html> <!-- Конец html -->
