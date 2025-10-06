@@ -220,26 +220,95 @@ body {
   color:rgba(255, 255, 255, 1); 
 }
 
-
-
-
 /* ===== Блок с фоном Fresco ===== */
-.Fresco {
-  position: relative;                /* ВАЖНО: чтобы псевдоэлемент ::before был привязан к контейнеру */
-  background-image: url("./assets/pic_background.png");
-  background-size: cover; background-position: center; background-repeat: no-repeat;
-  padding: 60px 40px; color:#2C2D35;
+.Fresco {                                           /* Обёртка секции с фоновой картинкой */
+  position: relative;                               /* НУЖНО: чтобы ::before позиционировался относительно этого блока */
+  background-image: url("./assets/pic_background.png"); /* Путь к фоновой картинке */
+  background-size: cover;                           /* Картинка покрывает весь блок без искажений */
+  width: 1440px;                                    /* Фиксированная ширина секции (как в макете) */
+  height: 574px;                                    /* Фиксированная высота секции (как в макете) */
+  margin-top: 70px;                                 /* Отступ сверху от предыдущего блока */
+  background-position: center;                      /* Центрируем фон по контейнеру */
+  background-repeat: no-repeat;                     /* Не повторяем фон */
+  padding: 70px 0 70px 165px;                       /* Внутренние отступы: сверху/снизу 70, слева 165, справа 0 */
+  color: #2C2D35;                                 /* Базовый цвет текста (на случай использования вне overlay) */
 }
-.Fresco::before {
-  content:""; position:absolute; inset:0; background: rgba(0,0,0,0.25); z-index:0;
-  /* ОШИБКА БЫЛА: не было position: relative у .Fresco → затемнение не привязывалось к блоку */
+
+.Fresco::before {                                   /* Полупрозрачная маска-затемнение поверх фона */
+  content: "";                                      /* Обязательное содержимое для псевдоэлемента */
+  position: absolute;                               /* Абсолютное позиционирование внутри .Fresco */
+  inset: 0;                                         /* Растянуть на всю площадь родителя (top/right/bottom/left:0) */
+  background: rgba(0, 0, 0, 0.25);                /* Чёрное затемнение 25% — улучшает читаемость текста */
+  z-index: 0;                                       /* Маска под содержимым, но над фоном */
+  /* ОШИБКА РАНЬШЕ: отсутствовал position:relative у .Fresco → ::before «оторван» от секции */
 }
-.Fresco .header-block {
-  position: relative; z-index:1; max-width:1110px; margin:0 auto;
+
+/* ===== Внутренний контейнер контента Fresco ===== */
+.Fresco .header-block {                              /* Контейнер для логотипа, заголовка, текста и кнопки */
+  position: relative;                                /* Чтобы оказаться над затемняющей маской (::before) */
+  z-index: 1;                                        /* Поднять над маской */
+  max-width: 1110px;                                 /* Ограничиваем строку контента по макету */
+  margin: 0 auto 0 0;                                /* Выравниваем контейнер к левому краю секции */
+  display: flex;                                     /* Включаем flex-раскладку */
+  flex-direction: column;                            /* Размещаем внутренние блоки В СТОЛБЕЦ: сверху .logo, ниже текст */
+  align-items: flex-start;                           /* Всё содержимое прилипает к левому краю */
+  gap: 24px;                                         /* Вертикальный зазор между .logo и текстовым блоком */
 }
-.Fresco h1, .Fresco p, .Fresco .dtn { color:#F4F6F5; } /* Светлый текст поверх затемнения */
-.Fresco .dtn {
-  margin-top: 24px; background:#598D66; border:none; border-radius:8px; height:46px; padding:0 24px;
-  color:#F4F6F5; font:600 16px/46px 'Raleway', sans-serif; cursor:pointer;
+
+/* ===== Первая строка: логотип + заголовок в одну линию ===== */
+.Fresco .logo {                                      /* Контейнер для иконки и заголовка в верхней строке */
+  display: flex;                                     /* В одну строку */
+  align-items: center;                               /* Вертикально центрируем иконку и текст */
+  gap: 20px;                                         /* Отступ между иконкой и заголовком */
 }
-.Fresco .dtn:hover { background:#376B44; }
+
+/* ===== Стили текста внутри секции на светлом overlay ===== */
+.Fresco h1, .Fresco p, .Fresco .dtn {                /* Групповое правило для основных элементов */
+  color: #F4F6F5;                                    /* Светлый текст для контраста на затемнении */
+}
+
+.Fresco h1 {                                         /* Заголовок «Новая коллекция…» справа от иконки */
+  margin: 0;                                         /* Сбрасываем дефолтные отступы браузера */
+  font-family: 'Raleway', sans-serif;                /* Шрифт */
+  font-weight: 600;                                  /* Толщина полужирная */
+  font-size: 40px;                                   /* Размер заголовка */
+  line-height: 1.2;                                  /* Межстрочный интервал */
+}
+
+/* ===== Текстовый блок под .logo ===== */
+.Fresco .text-wrap {                                 /* Обёртка для двух абзацев и кнопки */
+  display: flex;                                     /* Используем flex */
+  flex-direction: column;                            /* В столбец: абзац, абзац, кнопка */
+  align-items: flex-start;                           /* Всё по левому краю */
+  gap: 16px;                                         /* Равномерный вертикальный отступ между элементами */
+}
+
+.Fresco p {                                          /* Общие стили абзацев */
+  margin: 0;                                         /* Сбрасываем дефолтные отступы браузера */
+  font-family: 'Raleway', sans-serif;                /* Шрифт */
+  font-weight: 500;                                  /* Толщина */
+  font-size: 18px;                                   /* Размер */
+  line-height: 1.5;                                  /* Межстрочный интервал для читаемости */
+}
+
+.Fresco .text-wrap p + p {                           /* Только для ВТОРОГО абзаца — дополнительный отступ сверху */
+  margin-top: 24px;                                  /* Отступ между абзацами по макету (можно 40px, если так в ТЗ) */
+}
+
+/* ===== Кнопка «Ознакомиться» ===== */
+.Fresco .dtn {                                       /* Стиль кнопки в секции */
+  margin-top: 24px;                                  /* Отступ сверху от текста */
+  background: #598D66;                               /* Зелёный фон */
+  border: none;                                      /* Без рамки */
+  border-radius: 8px;                                /* Скруглённые углы */
+  height: 46px;                                      /* Фиксированная высота */
+  padding: 0 24px;                                   /* Горизонтальные внутренние отступы */
+  color: #F4F6F5;                                    /* Светлый текст */
+  font: 600 16px/46px 'Raleway', sans-serif;         /* Толщина/размер/межстрочный/шрифт (line-height = высоте для центровки) */
+  cursor: pointer;                                   /* Рука при наведении */
+  transition: background .2s ease;                   /* Плавное наведение */
+}
+
+.Fresco .dtn:hover {                                 /* Состояние при наведении */
+  background: #376B44;                               /* Чуть темнее */
+}
