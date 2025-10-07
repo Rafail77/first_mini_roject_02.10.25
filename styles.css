@@ -28,7 +28,9 @@ body {
 /* Корзина */
 .basket {
   position: relative;               /* НУЖНО для позиционирования бейджа */
-  display: inline-flex; align-items:center; justify-content:center;
+  display: inline-flex; 
+  align-items:center; 
+  justify-content:center;
   width: 40px; height: 40px;
   cursor: pointer; border-radius: 8px;
   color: #2C2D35;                   /* currentColor для SVG */
@@ -222,21 +224,21 @@ body {
 
 /* ===== Блок с фоном Fresco ===== */
 .Fresco {                                           /* Обёртка секции с фоновой картинкой */
-  position: relative;                               /* НУЖНО: чтобы ::before позиционировался относительно этого блока */
+  position: relative;                               /* якорь для ::before, чтобы overlay лег ровно по .Fresco */
   background-image: url("./assets/pic_background.png"); /* Путь к фоновой картинке */
   background-size: cover;                           /* Картинка покрывает весь блок без искажений */
   width: 1440px;                                    /* Фиксированная ширина секции (как в макете) */
   height: 574px;                                    /* Фиксированная высота секции (как в макете) */
   margin-top: 70px;                                 /* Отступ сверху от предыдущего блока */
   background-position: center;                      /* Центрируем фон по контейнеру */
-  background-repeat: no-repeat;                     /* Не повторяем фон */
-  color: #2C2D35;                                 /* Базовый цвет текста (на случай использования вне overlay) */
+  background-repeat: no-repeat;                     /* фон не повторяется плиткой */
+  color: #2C2D35;                                 /* базовый (запасной) цвет текста в секции (на случай использования вне overlay) */
 }
 
 .Fresco::before {                                   /* Полупрозрачная маска-затемнение поверх фона */
   content: "";                                      /* Обязательное содержимое для псевдоэлемента */
   position: absolute;                               /* Абсолютное позиционирование внутри .Fresco */
-  inset: 0;                                         /* Растянуть на всю площадь родителя (top/right/bottom/left:0) */
+  inset:0;                                          /* Растянуть на всю площадь родителя .Fresco (top/right/bottom/left:0). (требует relative у родителя) */                                        
   background: rgba(0, 0, 0, 0.25);                /* Чёрное затемнение 25% — улучшает читаемость текста */
   z-index: 0;                                       /* Маска под содержимым, но над фоном */
   /* ОШИБКА РАНЬШЕ: отсутствовал position:relative у .Fresco → ::before «оторван» от секции */
@@ -252,7 +254,6 @@ body {
   flex-direction: column;                            /* Размещаем внутренние блоки В СТОЛБЕЦ: сверху .logo, ниже текст */
   align-items: flex-start;                           /* Всё содержимое прилипает к левому краю */
   gap: 20px;                                         /* Вертикальный зазор между .logo и текстовым блоком */
-  border: 1px solid rgb(215, 238, 10); /* Видимая рамка карточки для визуализации. ПОТОМ УБЕРУ */
 }
 
 /* ===== Первая строка: логотип + заголовок в одну линию ===== */
@@ -260,19 +261,24 @@ body {
   display: flex;                                     /* В одну строку */
   align-items: center;                               /* Вертикально центрируем иконку и текст */
   gap: 20px;                                         /* Отступ между иконкой и заголовком */
+  width: 521px;
+  height: 80px;
+  margin-top: 70px ;
+  margin-left: 165px;
+  border: 1px solid rgb(215, 238, 10); /* Видимая рамка карточки для визуализации. ПОТОМ УБЕРУ */
 }
 
 /* ===== Стили текста внутри секции на светлом overlay ===== */
 .Fresco h1, .Fresco p, .Fresco .dtn {                /* Групповое правило для основных элементов */
-  color: #F4F6F5;                                    /* Светлый текст для контраста на затемнении */
+  color: #F4F6F5;                                  /* Явный светлый текст для контраста на затемнении. */
 }
 
 .Fresco h1 {                                         /* Заголовок «Новая коллекция…» справа от иконки */
   margin: 0;                                         /* Сбрасываем дефолтные отступы браузера */
   font-family: 'Raleway', sans-serif;                /* Шрифт */
-  font-weight: 600;                                  /* Толщина полужирная */
+  font-weight: 500;                                  /* Толщина полужирная */
   font-size: 40px;                                   /* Размер заголовка */
-  line-height: 1.2;                                  /* Межстрочный интервал */
+  line-height: 1;                                  /* Межстрочный интервал */
 }
 
 /* ===== Текстовый блок под .logo ===== */
